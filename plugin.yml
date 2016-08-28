@@ -1,0 +1,6 @@
+name: SuperPets
+author: RTGTeam
+description: A small pets plugin, lol
+version: 2.0.0 
+main: pets\main
+api: [2.0.0] 
