@@ -21,7 +21,7 @@ class PetCommand extends PluginCommand {
 	public function execute(CommandSender $sender, $currentAlias, array $args) {
 	if($sender->hasPermission("superpets")){
 		if (!isset($args[0])) {
-			$sender->sendMessage("§e======SuperPetsDropHelp======");
+			$sender->sendMessage("§e======SuperPetsV3.0.3======");
 			$sender->sendMessage("§b/pets generate [type] to spawn");
 			$sender->sendMessage("§b/pets off to set your pet off");
 			$sender->sendMessage("§b/pets tag [name] name your pet");
@@ -45,7 +45,7 @@ class PetCommand extends PluginCommand {
 				return true;
 			break;
 			case "help":
-				$sender->sendMessage("§e======SuperPetsDropHelp======");
+				$sender->sendMessage("§e======SuperPetsV3.0.3======");
 				$sender->sendMessage("§b/pets generate [type] to spawn");
 				$sender->sendMessage("§b/pets off to set your pet off");
 				$sender->sendMessage("§b/pets tag [name] name your pet");
