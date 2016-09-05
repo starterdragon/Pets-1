@@ -22,7 +22,13 @@ use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
 
 class main extends PluginBase implements Listener {
-	
+
+        /*
+             This plugin is not stolen or whatsoever! This plugin was fully made by InspectorGadget. No license needed
+             Website @rtgnetwork.tk
+             Email: rtg@rtgnetwork.tk
+        */
+
 	public static $pet;
 	public static $petState;
 	public $petType;
