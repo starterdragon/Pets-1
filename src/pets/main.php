@@ -2,6 +2,9 @@
 
 namespace pets;
 
+use pocketmine\entity\DroppedItem;
+use pocketmine\entity\Human;
+use pocketmine\entity\Creature;
 use pocketmine\level\Location;
 use pocketmine\level\Position;
 use pocketmine\nbt\tag\DoubleTag;
@@ -22,19 +25,14 @@ use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
 
 class main extends PluginBase implements Listener {
-
-        /*
-             This plugin is not stolen or whatsoever! This plugin was fully made by InspectorGadget. No license needed
-             Website @rtgnetwork.tk
-             Email: rtg@rtgnetwork.tk
-        */
-
+	
 	public static $pet;
 	public static $petState;
 	public $petType;
 	public $wishPet;
 	public static $isPetChanging;
 	public static $type;
+	protected $exemptedEntities = [];
 	
 	public function onEnable() {
 		@mkdir($this->getDataFolder());
@@ -46,10 +44,15 @@ class main extends PluginBase implements Listener {
 		Entity::registerEntity(PigPet::class);
 		Entity::registerEntity(RabbitPet::class);
 		Entity::registerEntity(ChickenPet::class);
+		Entity::registerEntity(BatPet::class);
+		Entity::registerEntity(EndermanPet::class);
+		Entity::registerEntity(BlazePet::class);
+		Entity::registerEntity(CowPet::class);
 		$this->saveDefaultConfig();
-		$this->getServer()->getLogger()->info(TextFormat::BLUE . "SuperPets has been connected to database");
+		$this->getServer()->getLogger()->info(TextFormat::BLUE . "SuperPets has been connected to MySQL database");
+		$this->getServer()->getLogger()->info(TextFormat::RED . "SuperPets V 3.0.7");
 		$this->getServer()->getLogger()->info(TextFormat::BLUE . "http://github.com/RTGThePlayer");
-		$this->getServer()->getLogger()->info(TextFormat::RED . "Copyrights RTGNetwork, all rights reserved");
+		$this->getServer()->getLogger()->info(TextFormat::RED . "Copyrights JDNetwork, all rights reserved");
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
@@ -102,8 +105,16 @@ class main extends PluginBase implements Listener {
  				break;
  				case "ChickenPet":
  				break;
+ 				case "BatPet":
+ 				break;
+ 				case "BlazePet":
+ 				break;
+ 				case "CowPet":
+ 				break;
+ 				case "EndermanPet":
+ 				break;
  				default:
- 					$pets = array("OcelotPet", "PigPet", "WolfPet",  "RabbitPet", "ChickenPet");
+ 					$pets = array("OcelotPet", "PigPet", "WolfPet",  "RabbitPet", "ChickenPet", "BatPet", "BlazePet", "CowPet", "EndermanPet");
  					$type = $pets[rand(0, 5)];
  			}
 			$pet = $this->create($player,$type, $source);
@@ -135,18 +146,63 @@ class main extends PluginBase implements Listener {
 	
 	public function onJoin(PlayerJoinEvent $event){
 		$player = $event->getPlayer();
-		$data = new Config($this->getDataFolder() . "players/" . strtolower($player->getName()) . ".yml", Config::YAML);
-		if($data->exists("type")){ 
-			$type = $data->get("type");
-			$this->changePet($player, $type);
-		}
-		if($data->exists("name")){ 
-			$name = $data->get("name");
-			$this->getPet($player->getName())->setNameTag($name);
-		}
+		$this->disablePet($player);
+	}
+
+	public function reload() {
+		$this->reloadConfig();
+		$this->saveDefaultConfig();
 	}
 	
-	public function onDisable() {
-		$sender->getServer->getLogger()->info("Disabling SuperPets by RTGNetwork");
+	public function removeEntities() {
+   $i = 0;
+   foreach($this->getServer()->getLevels() as $level) {
+     foreach($level->getEntities() as $entity) {
+       if(!$this->isEntityExempted($entity) && !($entity instanceof Creature)) {
+         $entity->close();
+         $i++;
+       }
+     }
+   }
+   return $i;
+	}
+	
+	public function getEntityCount() {
+   $ret = [0, 0, 0];
+   foreach($this->getServer()->getLevels() as $level) {
+     foreach($level->getEntities() as $entity) {
+       if($entity instanceof Human) {
+         $ret[0]++;
+       } else if($entity instanceof Creature) {
+         $ret[1]++;
+       } else {
+         $ret[2]++;
+       }
+     }
+   }
+   return $ret;
+	}
+	public function removeMobs() {
+   $i = 0;
+   foreach($this->getServer()->getLevels() as $level) {
+     foreach($level->getEntities() as $entity) {
+       if(!$this->isEntityExempted($entity) && $entity instanceof Creature && !($entity instanceof Human)) {
+         $entity->close();
+         $i++;
+       }
+     }
+   }
+   return $i;
+ 	}
+ 
+	public function exemptEntity(Entity $entity) {
+		$this->exemptedEntities[$entity->getID()] = $entity;
+  }
+  
+  public function isEntityExempted(Entity $entity) {
+    return isset($this->exemptedEntities[$entity->getID()]);
+	}
+  
+ 	public function onDisable() {
 	}
 }
