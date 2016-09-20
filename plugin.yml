@@ -1,9 +1,13 @@
 name: SuperPets
 author: RTGTeam
-description: A small pets plugin, lol
-version: 2.0.0 
+description: Regeneration for IG!
+version: 3.0.7
 main: pets\main
 api: [2.0.0]
 permissions:
-  superpets:
+  superpets.cmd:
+    default: op
+  superpets.ca:
+    default: op
+  superpets.tag:
     default: op
