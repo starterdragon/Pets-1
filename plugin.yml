@@ -3,10 +3,7 @@ author: RTGTeam
 description: Regeneration for IG!
 version: 3.0.7
 main: pets\main
-api:
-- 2.0.0
-- 1.12.0
-- 1.10.0
+api: [1.13.0, 1.14.0, 2.0.0]
 permissions:
   superpets.cmd:
     default: op
