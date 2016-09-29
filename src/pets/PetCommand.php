@@ -1,9 +1,11 @@
 <?php
 
 namespace pets;
-/*All rights reserved JDNetwork.
-	*Do not redistribute this plugin!!
+/**
+ *All rights reserved JDNetwork
+ *Do not redistribute this plugin!!
 */
+
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pets\main;
@@ -19,9 +21,12 @@ class PetCommand extends PluginCommand {
 		$this->main = $main;
 		$this->setAliases(array("pets"));
 	}
-
+	/*
+	 * Lol, have fun!
+	*/
+	
 	public function execute(CommandSender $sender, $currentAlias, array $args) {
-	if($sender->hasPermission("superpets.cmd")){
+	if($sender instanceof Player && !$sender->hasPermission("superpets") {
 		if (!isset($args[0])) {
 			$sender->sendMessage("§e======SuperPetsV3.0.7======");
 			$sender->sendMessage("§b/pets generate [type] §eto spawn");
@@ -35,6 +40,7 @@ class PetCommand extends PluginCommand {
 			$sender->sendMessage("§aIf you have any problem, pls relog to fix it");
 			$sender->sendMessage(TF::BLUE . "/pets clearall for OP and people with Perm");
 			return true;
+		}
 		}
 		switch (strtolower($args[0])){
 			case "name":
@@ -66,7 +72,7 @@ class PetCommand extends PluginCommand {
 				$sender->sendMessage("Removed " . ($d = $this->main->removeMobs()) . " mob" . ($d == 1 ? "" : "s") . " and " . ($d = $this->main->removeEntities()) . " entit" . ($d == 1 ? "y" : "ies") . ".");
 				}
 				return true;
-    break;
+    			break;
 			case "off":
 				$this->main->disablePet($sender);
 				$sender->sendMessage("§bYour pet has been cleared/turned off!");
