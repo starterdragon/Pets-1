@@ -204,5 +204,7 @@ class main extends PluginBase implements Listener {
 	}
   
  	public function onDisable() {
+		$this->getServer()->getLogger()->info("Turning off");
+		$this->saveDefaultConfig();
 	}
 }
