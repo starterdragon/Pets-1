@@ -26,6 +26,9 @@ class PetCommand extends PluginCommand {
 	*/
 	
 	public function execute(CommandSender $sender, $currentAlias, array $args) {
+	/*
+	 * ($sender instanceof Player) means Console cant run this command!
+	*/
 	if($sender instanceof Player && !$sender->hasPermission("superpets") {
 		if (!isset($args[0])) {
 			$sender->sendMessage("§e======SuperPetsV3.0.7======");
