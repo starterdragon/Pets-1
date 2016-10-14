@@ -49,6 +49,9 @@ class main extends PluginBase implements Listener {
 		Entity::registerEntity(BlazePet::class);
 		Entity::registerEntity(CowPet::class);
 		$this->saveDefaultConfig();
+		/*
+		 * you can change all this!
+		*/
 		$this->getServer()->getLogger()->info(TextFormat::BLUE . "SuperPets has been connected to MySQL database");
 		$this->getServer()->getLogger()->info(TextFormat::RED . "SuperPets V 3.0.7");
 		$this->getServer()->getLogger()->info(TextFormat::BLUE . "http://github.com/RTGThePlayer");
@@ -204,7 +207,6 @@ class main extends PluginBase implements Listener {
 	}
   
  	public function onDisable() {
-		$this->getServer()->getLogger()->info("Turning off");
-		$this->saveDefaultConfig();
+		$this->getServer()->getLogger()->info("Turning Off");
 	}
 }
