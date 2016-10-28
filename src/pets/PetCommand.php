@@ -174,7 +174,7 @@ class PetCommand extends PluginCommand {
 							$sender->sendMessage($this->main->getConfig()->get("rights-msg"));
 							return true;
 						break;
-						case "WhiteRabbit":
+						/* case "WhiteRabbit":
 							$this->main->changePet($sender, "WhiteRabbitPet");
 							$pettype = "WhiteRabbit";
 							$sender->sendMessage(TF::BLUE . "Your pet has been changed to a WhiteRabbit!");
@@ -222,7 +222,7 @@ class PetCommand extends PluginCommand {
 							$sender->sendMessage(TF::BLUE . "Your pet has been changed to a ZombieHorse!");
 							$sender->sendMessage($this->main->getConfig()->get("rights-msg"));
 							return true;
-						break;
+						break; */
 					default:
 						$sender->sendMessage("§b/pets generate [type]");
 						$sender->sendMessage("§cPets: Dog, Rabbit, Pig, Cat, Chicken, Bat, Blaze, Cow, Enderman, BrownRabbit, Zombie, WhiteRabbit, Sheep, Horse, Donkey, Mule, SkeletonHorse, ZombieHorse");
