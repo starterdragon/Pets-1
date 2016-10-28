@@ -77,7 +77,7 @@ class main extends PluginBase implements Listener {
 		* website: www.github.com/RTGThePlayer
 		* API: 2.1.0, 2.0.0
 		* Author: InspectorGadget
-		* Contribution: JDNetwork
+		* Contribution: GITHUB
 		* MySQL: true
 		* Connection status: ACTIVE 4ms
 		* STATUS: Connected
