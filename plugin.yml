@@ -1,0 +1,11 @@
+name: SuperPets
+author: RTGTeam
+description: People has been dreaming for ages, now its a reality!
+version: 3.1.4
+main: pets\main
+api: [2.0.0, 2.1.0]
+permissions:
+  superpets:
+    default: op
+  superload:
+    default: op
